@@ -27,6 +27,12 @@
 #include <platform.h>
 #include <interrupt.h>
 
+static volatile uint8_t *uart = (void *)0x10000000;
+#define REG_QUEUE     0
+#define REG_LINESTAT  5
+#define REG_STATUS_RX 0x01
+#define REG_STATUS_TX 0x20
+
 static void usart_handler(int vector, void *param)
 {
     rt_hw_serial_isr((struct rt_serial_device *)param, RT_SERIAL_EVENT_RX_IND);
@@ -38,14 +44,6 @@ static rt_err_t usart_configure(struct rt_serial_device *serial,
     RT_ASSERT(serial != RT_NULL);
     RT_ASSERT(cfg != RT_NULL);
  
-    GPIO_REG(GPIO_IOF_SEL) &= ~IOF0_UART0_MASK;
-    GPIO_REG(GPIO_IOF_EN) |= IOF0_UART0_MASK;
-
-    UART0_REG(UART_REG_DIV) = get_cpu_freq() / cfg->baud_rate - 1;
-    UART0_REG(UART_REG_TXCTRL) |= UART_TXEN;
-    UART0_REG(UART_REG_RXCTRL) |= UART_RXEN;
-    UART0_REG(UART_REG_IE) = UART_IP_RXWM;
-
     return RT_EOK;
 }
 
@@ -67,19 +65,18 @@ static rt_err_t usart_control(struct rt_serial_device *serial,
 
 static int usart_putc(struct rt_serial_device *serial, char c)
 {
-    while (UART0_REG(UART_REG_TXFIFO) & 0x80000000) ;
-    UART0_REG(UART_REG_TXFIFO) = c;
+    while ((uart[REG_LINESTAT] & REG_STATUS_TX) == 0);
+    uart[REG_QUEUE] = c;
 
     return 0;
 }
 
 static int usart_getc(struct rt_serial_device *serial)
 {
-    rt_int32_t val = UART0_REG(UART_REG_RXFIFO);
-    if (val > 0)
-        return (rt_uint8_t)val;
-    else
-        return -1;
+    if (uart[REG_LINESTAT] & REG_STATUS_RX) {
+      return uart[REG_QUEUE];
+    }
+    return -1;
 }
 
 static struct rt_uart_ops ops =
