@@ -9,4 +9,4 @@ clean:
 run:
 	scons
 	riscv64-unknown-elf-objdump -d rtthread.elf > build/code.txt
-	~/software/qemu/riscv32-softmmu/qemu-system-riscv32 -nographic -kernel rtthread.elf -machine virt
+	qemu-system-riscv64 -nographic -kernel rtthread.elf -machine virt
