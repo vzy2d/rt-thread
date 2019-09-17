@@ -7,16 +7,9 @@
 #define MCAUSE_INT         0x80000000
 #define MCAUSE_CAUSE       0x7FFFFFFF
 
-#include "sifive/const.h"
-#include "sifive/devices/aon.h"
-#include "sifive/devices/clint.h"
-#include "sifive/devices/gpio.h"
-#include "sifive/devices/otp.h"
-#include "sifive/devices/plic.h"
-#include "sifive/devices/prci.h"
-#include "sifive/devices/pwm.h"
-#include "sifive/devices/spi.h"
-#include "sifive/devices/uart.h"
+#include "const.h"
+#include "clint.h"
+#include "plic.h"
 
 /****************************************************************************
  * Platform definitions
@@ -123,8 +116,6 @@
 
 #define PLIC_NUM_INTERRUPTS 52
 #define PLIC_NUM_PRIORITIES 7
-
-#include "hifive1.h"
 
 unsigned long get_cpu_freq(void);
 unsigned long get_timer_freq(void);

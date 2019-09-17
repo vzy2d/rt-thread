@@ -23,7 +23,7 @@ BUILD = 'debug'
 
 CORE = 'risc-v'
 MAP_FILE = 'rtthread.map'
-LINK_FILE = './freedom-e-sdk/bsp/env/freedom-e300-hifive1/flash.lds'
+LINK_FILE = './qemu/flash.lds'
 TARGET_NAME = 'rtthread.bin'
 
 #------- GCC settings ----------------------------------------------------------

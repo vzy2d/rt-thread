@@ -32,6 +32,7 @@
 extern void use_default_clocks(void);
 extern void use_pll(int refsel, int bypass, int r, int f, int q);
 
+#define RTC_FREQ 32768
 #define TICK_COUNT  (2 * RTC_FREQ / RT_TICK_PER_SECOND)
 
 #define MTIME       (*((volatile uint64_t *)(CLINT_CTRL_ADDR + CLINT_MTIME)))
