@@ -27,12 +27,6 @@
 #include <platform.h>
 #include <interrupt.h>
 
-static volatile uint8_t *uart = (void *)0x10000000;
-#define REG_QUEUE     0
-#define REG_LINESTAT  5
-#define REG_STATUS_RX 0x01
-#define REG_STATUS_TX 0x20
-
 static void usart_handler(int vector, void *param)
 {
     rt_hw_serial_isr((struct rt_serial_device *)param, RT_SERIAL_EVENT_RX_IND);
@@ -65,18 +59,16 @@ static rt_err_t usart_control(struct rt_serial_device *serial,
 
 static int usart_putc(struct rt_serial_device *serial, char c)
 {
-    while ((uart[REG_LINESTAT] & REG_STATUS_TX) == 0);
-    uart[REG_QUEUE] = c;
+    void uart_putc(uint8_t ch);
+    uart_putc(c);
 
     return 0;
 }
 
 static int usart_getc(struct rt_serial_device *serial)
 {
-    if (uart[REG_LINESTAT] & REG_STATUS_RX) {
-      return uart[REG_QUEUE];
-    }
-    return -1;
+    int uart_getc(void);
+    return uart_getc();
 }
 
 static struct rt_uart_ops ops =

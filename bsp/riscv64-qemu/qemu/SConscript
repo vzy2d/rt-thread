@@ -5,7 +5,7 @@ Import('RTT_ROOT')
 from building import *
 
 cwd = GetCurrentDir()
-src = [ 'plic_driver.c', 'start.S', 'init.c',
+src = [ 'plic_driver.c', 'start.S', 'init.c', 'uart.c',
         'board.c', 'drv_usart.c', 'interrupt.c', 'main.c']
 
 CPPPATH = [ cwd + '/include' ]
