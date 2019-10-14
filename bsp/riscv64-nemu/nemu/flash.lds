@@ -32,24 +32,24 @@ SECTIONS
     *(.gnu.linkonce.t.*)
 
     /* section information for finsh shell */
-    . = ALIGN(4);
+    . = ALIGN(8);
     __fsymtab_start = .;
     KEEP(*(FSymTab))
     __fsymtab_end = .;
-    . = ALIGN(4);
+    . = ALIGN(8);
     __vsymtab_start = .;
     KEEP(*(VSymTab))
     __vsymtab_end = .;
-    . = ALIGN(4);
+    . = ALIGN(8);
 
-    . = ALIGN(4);
+    . = ALIGN(8);
     __rt_init_start = .;
     KEEP(*(SORT(.rti_fn*)))
     __rt_init_end = .;
-    . = ALIGN(4);
+    . = ALIGN(8);
 
     /* section information for modules */
-    . = ALIGN(4);
+    . = ALIGN(8);
     __rtmsymtab_start = .;
     KEEP(*(RTMSymTab))
     __rtmsymtab_end = .;
@@ -72,7 +72,7 @@ SECTIONS
     *(.gnu.linkonce.r.*)
   } >flash AT>flash :flash
 
-  . = ALIGN(4);
+  . = ALIGN(8);
 
   .preinit_array  :
   {
@@ -130,13 +130,13 @@ SECTIONS
 
   .lalign         :
   {
-    . = ALIGN(4);
+    . = ALIGN(8);
     PROVIDE( _data_lma = . );
   } >flash AT>flash :flash
 
   .dalign         :
   {
-    . = ALIGN(4);
+    . = ALIGN(8);
     PROVIDE( _data = . );
   } >ram AT>flash :ram_init
 
@@ -156,7 +156,7 @@ SECTIONS
     *(.srodata .srodata.*)
   } >ram AT>flash :ram_init
 
-  . = ALIGN(4);
+  . = ALIGN(8);
   PROVIDE( _edata = . );
   PROVIDE( edata = . );
 
@@ -169,7 +169,7 @@ SECTIONS
     *(.bss .bss.*)
     *(.gnu.linkonce.b.*)
     *(COMMON)
-    . = ALIGN(4);
+    . = ALIGN(8);
   } >ram AT>ram :ram
 
   . = ALIGN(8);
