@@ -1,0 +1,17 @@
+# RT-Thread building script for component
+
+Import('rtconfig')
+Import('RTT_ROOT')
+from building import *
+
+cwd = GetCurrentDir()
+src = [ 'plic_driver.c', 'start.S', 'init.c', 'uart.c',
+        'board.c', 'drv_usart.c', 'interrupt.c', 'main.c']
+
+CPPPATH = [ cwd + '/include' ]
+
+CPPDEFINES = []
+
+group = DefineGroup('Libraries', src, depend = [''], CPPPATH = CPPPATH, CPPDEFINES=CPPDEFINES)
+
+Return('group')
