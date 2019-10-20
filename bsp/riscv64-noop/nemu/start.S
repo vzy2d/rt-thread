@@ -3,7 +3,7 @@
 
 /* This is defined in sifive/platform.h, but that can't be included from
  * assembly. */
-#define CLINT_CTRL_ADDR 0x02000000
+#define CLINT_CTRL_ADDR 0x40700000
 
 	.section .init
 	.globl _start

@@ -247,6 +247,8 @@ int rtthread_startup(void)
     rt_hw_spin_lock(&_cpus_lock);
 #endif /*RT_USING_SMP*/
 
+    rt_kprintf("scheduler about to start...\n");
+
     /* start scheduler */
     rt_system_scheduler_start();
 

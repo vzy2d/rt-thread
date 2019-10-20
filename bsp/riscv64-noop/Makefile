@@ -13,7 +13,7 @@ nemu_run:
 	$(MAKE) -C $(NEMU_HOME) ISA=riscv64 run ARGS="-b $(abspath rtthread.bin)"
 
 run:
-	# scons
+	scons
 	riscv64-unknown-elf-objdump -d rtthread.elf > build/code.txt
 	riscv64-unknown-elf-objcopy -S --set-section-flags .bss=alloc,contents -O binary rtthread.elf rtthread.bin
 	$(MAKE) -C $(NOOP_HOME) emu IMAGE="$(abspath rtthread.bin)"
