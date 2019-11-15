@@ -23,7 +23,7 @@ BUILD = 'debug'
 
 CORE = 'risc-v'
 MAP_FILE = 'rtthread.map'
-LINK_FILE = './qemu/flash.lds'
+LINK_FILE = './riscv64/flash.lds'
 TARGET_NAME = 'rtthread.bin'
 
 #------- GCC settings ----------------------------------------------------------
@@ -49,6 +49,9 @@ if PLATFORM == 'gcc':
     LFLAGS += ' -Wl,--gc-sections,-cref,-Map=' + MAP_FILE
     LFLAGS += ' -T ' + LINK_FILE
     LFLAGS += ' -Wl,-wrap=memset'
+
+    if os.getenv('MAKE_TARGET'):
+        CFLAGS += ' -D' + os.getenv('MAKE_TARGET')
 
     CPATH = ''
     LPATH = ''
