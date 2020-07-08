@@ -10,8 +10,8 @@ ifeq ($(MAKECMDGOALS),qemu)
 TARGET := __QEMU__
 else ifeq ($(MAKECMDGOALS),nemu)
 TARGET := __NEMU__
-else ifeq ($(MAKECMDGOALS),noop)
-TARGET := __NOOP__
+else ifeq ($(MAKECMDGOALS),nutshell)
+TARGET := __NUTSHELL__
 endif
 
 rtthread.elf:
@@ -25,5 +25,5 @@ qemu: rtthread.elf
 nemu: rtthread.elf
 	$(MAKE) -C $(NEMU_HOME) ISA=riscv64 run ARGS="-b $(abspath rtthread.bin)"
 
-noop: rtthread.elf
-	$(MAKE) -C $(NOOP_HOME) emu IMAGE="$(abspath rtthread.bin)"
+nutshell: rtthread.elf
+	$(MAKE) -C $(NUTSHELL_HOME) emu IMAGE="$(abspath rtthread.bin)"
