@@ -14,3 +14,7 @@ int atoi(const char* nptr) {
 }
 
 #endif
+
+void* malloc(size_t size){
+  return rt_malloc(size);
+}

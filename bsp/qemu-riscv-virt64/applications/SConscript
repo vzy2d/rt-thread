@@ -6,4 +6,12 @@ CPPPATH = [cwd]
 
 group = DefineGroup('Applications', src, depend = [''], CPPPATH = CPPPATH)
 
+list = os.listdir(cwd)
+
+for item in list:
+    path = os.path.join(cwd, item)
+    if(os.path.isfile(os.path.join(path, 'SConscript'))):
+        print('item', os.path.join(item, 'SConscript'))
+        group = group + SConscript(os.path.join(item, 'SConscript'))
+
 Return('group')
