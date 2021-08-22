@@ -23,7 +23,7 @@ else:
 if os.getenv('RTT_EXEC_PATH'):
     EXEC_PATH = os.getenv('RTT_EXEC_PATH')
 
-BUILD = 'debug'
+BUILD = ''
 
 if PLATFORM == 'gcc':
     # toolchains
@@ -39,14 +39,14 @@ if PLATFORM == 'gcc':
     OBJCPY  = PREFIX + 'objcopy'
 
     DEVICE  = ' -fno-pic -mcmodel=medany -march=rv64imfd -mabi=lp64d'
-    CFLAGS  = DEVICE + ' -fvar-tracking -ffreestanding -fno-common -ffunction-sections -fdata-sections -fstrict-volatile-bitfields '
+    CFLAGS  = DEVICE + ' -ffreestanding -fno-common -ffunction-sections -fdata-sections -fstrict-volatile-bitfields '
     AFLAGS  = ' -c' + DEVICE + ' -x assembler-with-cpp'
     LFLAGS  = ' --gc-sections -Map=rtthread.map -cref -u _start -T link.lds '
     CPATH   = ''
     LPATH   = ''
 
     if BUILD == 'debug':
-        CFLAGS += ' -O0 -ggdb'
+        CFLAGS += ' -O0 -ggdb -fvar-tracking'
         AFLAGS += ' -ggdb'
     else:
         CFLAGS += ' -O2 -Os'
