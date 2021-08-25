@@ -49,7 +49,7 @@ if PLATFORM == 'gcc':
         CFLAGS += ' -O0 -ggdb -fvar-tracking'
         AFLAGS += ' -ggdb'
     else:
-        CFLAGS += ' -O2 -Os'
+        CFLAGS += ' -O2 -Os -U_FORTIFY_SOURCE'
 
     CXXFLAGS = CFLAGS
 
