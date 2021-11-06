@@ -14,5 +14,8 @@ int sprintf(char *out, const char *fmt, ...) {
   return 0;
 }
 
+int fflush(){
+  return 0;
+}
 
 #endif
