@@ -12,6 +12,7 @@
 #define _SYS_TIME_H_
 
 #include <rtconfig.h>
+#include <rtthread.h>
 #include <time.h>
 
 #ifdef __cplusplus
@@ -36,7 +37,7 @@ extern "C" {
  * Structure returned by gettimeofday(2) system call,
  * and used in other calls.
  */
-#if !(defined(_WIN32))
+#if !(defined(_WIN32)) && !(defined(USING_RV64_LINUX_GNU_TOOLCHAIN))
 struct timeval {
     long    tv_sec;     /* seconds */
     long    tv_usec;    /* and microseconds */
@@ -58,8 +59,10 @@ struct timezone {
 
 int stime(const time_t *t);
 time_t timegm(struct tm * const t);
+#ifndef USING_RV64_LINUX_GNU_TOOLCHAIN
 int gettimeofday(struct timeval *tv, struct timezone *tz);
 int settimeofday(const struct timeval *tv, const struct timezone *tz);
+#endif
 #if defined(__ARMCC_VERSION) || defined (__ICCARM__)
 struct tm *gmtime_r(const time_t *timep, struct tm *r);
 #endif

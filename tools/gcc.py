@@ -170,6 +170,7 @@ def GCCResult(rtconfig, str):
         if posix_thread:
             result += '#define LIBC_POSIX_THREADS 1\n'
 
+        result += "#define USING_RV64_LINUX_GNU_TOOLCHAIN 1\n"
         os.remove('__tmp.c')
     return result
 
