@@ -1,6 +1,26 @@
 # QEMU/RISCV64 VIRT BSP Introduction
 
-[中文页](README_ZH.md) | English
+## 使用方法
+
+下载env环境和软件包,并在home目录下生成.env文件夹
+
+```
+scons --menuconfig
+```
+
+配置环境变量
+
+```
+source ~/.env/env.sh
+```
+
+在对应bsp目录执行以下命令,下载软件包到bsp目录下的packages文件夹中
+
+```
+pkgs --update
+```
+
+
 
 RISC-V is a free and open ISA enabling a new era of processor innovation through open standard collaboration. This project ported RT-Thread on QEMU RISCV64 VIRT machine.
 
@@ -12,7 +32,7 @@ Download the cross compiler tool chain, it is recommended to use the sifive tool
 https://www.sifive.com/software
 ```
 
-Select the fitting platform, we recommend Ubuntu. 
+Select the fitting platform, we recommend Ubuntu.
 
 Unzip the tool chain to the specified directory.
 
@@ -26,7 +46,7 @@ Enter `rt-thread/bsp/qemu-riscv-virt64` directory and input
 scons
 ```
 
- `rtthread.elf` and `rtthread .bin` files are generated. 
+`rtthread.elf` and `rtthread .bin` files are generated.
 
 ## 2. Execution
 
@@ -78,7 +98,7 @@ Save it and compile `scons`.
 
 To get RT-Thread running in S-Mode, enable the opensbi, and then start up the RT-Thread through opensbi.
 
-Compile qemu or downloaded premiere-version qemu that built-in opensbi, then executing `./qemu-nographic-smode.sh` can get it successfully running.  
+Compile qemu or downloaded premiere-version qemu that built-in opensbi, then executing `./qemu-nographic-smode.sh` can get it successfully running.
 
 The qemu installed with `sudo apt install qemu-system-misc` is an ordinary-version and may compile the opensbi on its own.
 
@@ -88,7 +108,7 @@ cd opensbi
 make PLATFORM=generic CROSS_COMPILE=~/gcc/bin/riscv64-unknown-elf-
 ```
 
-`/build/platform/generic/firmware/fw_jump.elf` file is generated. 
+`/build/platform/generic/firmware/fw_jump.elf` file is generated.
 
 Enter the following command to run:
 
@@ -96,7 +116,7 @@ Enter the following command to run:
 qemu-system-riscv64 -nographic -machine virt -m 256M -kernel rtthread.bin -bios ~/opensbi/build/platform/generic/firmware/fw_jump.elf
 ```
 
-Result is shown as follows: 
+Result is shown as follows:
 
 ```
 OpenSBI v0.9
