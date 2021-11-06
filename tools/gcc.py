@@ -31,8 +31,9 @@ def GetGCCRoot(rtconfig):
 
     if prefix.endswith('-'):
         prefix = prefix[:-1]
-
-    if exec_path == '/usr/bin':
+    if prefix == 'riscv64-linux-gnu' and exec_path == '/usr/bin':
+        root_path = os.path.join('/usr', prefix)
+    elif exec_path == '/usr/bin':
         root_path = os.path.join('/usr/lib', prefix)
     else:
         root_path = os.path.join(exec_path, '..', prefix)
