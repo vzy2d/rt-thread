@@ -9,7 +9,6 @@
  */
 
 OUTPUT_ARCH(mips)
-GROUP(-lgcc -lc)
 
 ENTRY(_start)
 SECTIONS

@@ -106,7 +106,7 @@
 #define HAVE_SIGINFO
 #define HAVE_SIGVAL
 #define HAVE_SIGEVENT
-#define USING_RV64_LINUX_GNU_TOOLCHAIN
+#define USING_LINUX_GNU_TOOLCHAIN
 /* Network */
 
 /* Socket abstraction layer */

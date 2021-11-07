@@ -54,7 +54,7 @@
 
 /* C++ features */
 
-
+#define USING_LINUX_GNU_TOOLCHAIN
 /* Command shell */
 
 #define RT_USING_FINSH
@@ -86,8 +86,8 @@
 
 /* POSIX layer and C standard library */
 
-#define RT_USING_LIBC
-#define RT_USING_PTHREADS
+// #define RT_USING_LIBC
+// #define RT_USING_PTHREADS
 #define PTHREAD_NUM_MAX 8
 
 /* Network */

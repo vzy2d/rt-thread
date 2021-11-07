@@ -151,7 +151,7 @@ static const struct rt_uart_ops mipssim_uart_ops =
 
 struct rt_uart_mipssim uart_dev0 =
 {
-    (void *)UART0_BASE,
+    (void *)0xbfe40000,//UART0_BASE,
     4,
 };
 struct rt_serial_device serial;

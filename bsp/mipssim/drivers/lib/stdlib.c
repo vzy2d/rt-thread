@@ -13,4 +13,15 @@ int atoi(const char* nptr) {
   return x;
 }
 
+unsigned long __stack_chk_guard;
+void __stack_chk_guard_setup(void)
+{
+     __stack_chk_guard = 0xABCDDCBA;
+}
+
+void __stack_chk_fail(void)                         
+{
+ /* Error message */                                 
+}
+
 #endif
