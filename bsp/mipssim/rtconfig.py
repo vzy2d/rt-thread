@@ -28,7 +28,7 @@ else:
 if os.getenv('RTT_EXEC_PATH'):
 	EXEC_PATH = os.getenv('RTT_EXEC_PATH')
 
-BUILD       = 'debug'
+BUILD       = 'release'
 
 PREFIX = 'mips-linux-gnu-'
 CC = PREFIX + 'gcc'
@@ -55,7 +55,7 @@ if BUILD == 'debug':
     CFLAGS += ' -O0 -gdwarf-2'
     AFLAGS += ' -gdwarf-2'
 else:
-    CFLAGS += ' -O2'
+    CFLAGS += ' -Os'
 
 DUMP_ACTION = OBJDUMP + ' -D -S $TARGET > rtt.asm\n'
 READELF_ACTION = READELF + ' -a $TARGET > rtt.map\n'

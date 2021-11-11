@@ -65,5 +65,14 @@ char *strrchr(const char *s, int c)
     return p_char;
 }
 
+int strtol(const char* str){
+  RT_ASSERT(0);
+}
+
+char* __strcat_chk(char* dst, const char* src){
+  size_t len = rt_strlen(dst);
+  strcpy(dst + len, src);
+  return dst;
+}
 
 #endif
