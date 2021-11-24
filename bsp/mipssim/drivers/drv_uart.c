@@ -37,14 +37,24 @@ static rt_err_t mipssim_uart_configure(struct rt_serial_device *serial, struct s
 
     uart_dev = (struct rt_uart_mipssim *)serial->parent.user_data;
 
-    UART_IER(uart_dev->base) = 0; /* clear interrupt */
-    UART_FCR(uart_dev->base) = 0xc1; /* reset UART Rx/Tx */
-    /* set databits, stopbits and parity. (8-bit data, 1 stopbit, no parity) */
-    UART_LCR(uart_dev->base) = 0x3;
-    UART_MCR(uart_dev->base) = 0x3;
-    UART_LSR(uart_dev->base) = 0x60;
-    UART_MSR(uart_dev->base) = 0xb0;
+    // UART_IER(uart_dev->base) = 0; /* clear interrupt */
+    // UART_FCR(uart_dev->base) = 0xc1; /* reset UART Rx/Tx */
+    // /* set databits, stopbits and parity. (8-bit data, 1 stopbit, no parity) */
+    // UART_LCR(uart_dev->base) = 0x3;
+    // UART_MCR(uart_dev->base) = 0x3;
+    // UART_LSR(uart_dev->base) = 0x60;
+    // UART_MSR(uart_dev->base) = 0xb0;
 
+    // UART_LSB(uart_dev->base) = 13;
+
+    UART_IER(uart_dev->base) = 0;
+    uint8_t lcr = UART_LCR(uart_dev->base);
+    UART_LCR(uart_dev->base) = lcr | (1 << 7);
+    UART_LSB(uart_dev->base) = 14;
+    UART_MSB(uart_dev->base) = 0;
+    UART_LCR(uart_dev->base) = 3;
+    uint8_t ier = UART_IER(uart_dev->base);
+    UART_IER(uart_dev->base) = ier | (1 << 0);
     return RT_EOK;
 }
 
