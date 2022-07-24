@@ -40,7 +40,7 @@ if PLATFORM == 'gcc':
     OBJDUMP = PREFIX + 'objdump'
     OBJCPY  = PREFIX + 'objcopy'
 
-    DEVICE  = ' -fno-pic -mcmodel=medany -march=rv64ifd -mabi=lp64d'
+    DEVICE  = ' -fno-pic -mcmodel=medany -march=rv64imfd -mabi=lp64d'
     CFLAGS  = DEVICE + ' -ffreestanding -fno-common -ffunction-sections -fdata-sections -fstrict-volatile-bitfields '
     AFLAGS  = ' -c' + DEVICE + ' -x assembler-with-cpp'
     LFLAGS  = ' --gc-sections -Map=rtthread.map -cref -u _start '
